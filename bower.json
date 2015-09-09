@@ -16,5 +16,6 @@
     "list",
     "jets"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "ignore": ["/node_modules", "npm-debug.log"]
 }
