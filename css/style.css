@@ -1,0 +1,239 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.jets-header-helper{
+  font-size: 22px;
+}
+
+.jets-author{
+  position: relative;
+  top: -45px;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+
+.speed-badge-container{
+  position: relative;
+}
+.speed-badge-container .badge{
+  margin-top: 2rem;
+}
+.speed-badge-container .badge:after{
+  content: ' ' !important;
+}
+.speed-badge-container .badge.new{
+  -webkit-transition: background-color .5s ease-out;
+  transition: background-color .5s ease-out;
+}
+.speed-badge-container .badge.new.worse{
+  background-color: #fb8c00;
+}
+.speed-badge-container .badge.new.worst{
+  background-color: #e65100;
+}
+
+.speed-badge-container .preloader-wrapper{
+  position: absolute;
+  top: -1.47rem;
+  left: -.6rem;
+  visibility: hidden;
+}
+
+.search-inputs .search-row .progress{
+  margin-left: 3rem;
+  width: calc(100% - 3rem);
+  margin-top: 2px;
+  margin-bottom: 0;
+  visibility: hidden;
+}
+
+.search-inputs .search-row input{
+  margin-bottom: 0 !important;
+}
+
+.search-row.active .progress,
+.search-row.active .preloader-wrapper{
+  visibility: visible;
+}
+
+.search-inputs .materialize-tags{
+  padding-bottom: 11px;
+  margin-bottom: 1px;
+}
+
+.search-inputs .materialize-tags .n-tag.tt-hint,
+.search-inputs .materialize-tags .n-tag.tt-input{
+  height: 27px;
+}
+
+.materialize-box{
+  margin-bottom: 0;
+}
+.materialize-box .progress{
+  margin-top: 0;
+  margin-bottom: 0;
+  visibility: hidden;
+}
+.materialize-box.active .progress {
+  visibility: visible;
+}
+.materialize-tags .tag.badge.active{
+  background: #508EF5;
+}
+.materialize-tags input:disabled{
+  border-bottom: 0;
+}
+.materialize-input-container{
+  display: none;
+}
+.materialize-button-helper{
+  margin-bottom: 10px;
+}
+.hidden-search-elem{
+  display: none;
+}
+.search-opening-speech-section{
+  margin-bottom: 20px;
+}
+.crown{
+  background: url('../img/crown.png');
+  width: 23px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: -2px;
+  z-index: 2;
+  opacity: 0;
+  transition:         all 0s linear;
+  -webkit-transition: all 0s linear;
+  -moz-transition:    all 0s linear;
+  -o-transition:      all 0s linear;
+}
+.crown.show{
+  top: -22px;
+  opacity: 1;
+  transition:       all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition:    all 0.2s ease-out;
+  -o-transition:      all 0.2s ease-out;
+}
+
+.sunburst-container{
+  height: 31px;
+  overflow: hidden;
+  position: absolute;
+  top: -31px;
+  width: 65px;
+  opacity: 0;
+  -webkit-transform: translate(-25%);
+      -ms-transform: translate(-25%);
+          transform: translate(-25%);
+  transition:         opacity 0s linear;
+  -webkit-transition: opacity 0s linear;
+  -moz-transition:    opacity 0s linear;
+  -o-transition:      opacity 0s linear;
+}
+
+.sunburst-container.show{
+  opacity: .5;
+  transition:       opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -moz-transition:    opacity 0.5s ease-out;
+  -o-transition:      opacity 0.5s ease-out;
+}
+
+.sunburst{
+  background-image: url('../img/sunburst.jpg');
+  width: 65px;
+  height: 65px;
+  position: absolute;
+  background-size: cover;
+  -webkit-animation: spin 35s linear infinite;
+  animation: spin 35s linear infinite;
+}
+
+.action-demo-container{
+  position: relative;
+}
+
+.action-demo{
+  max-width: 100%;
+}
+
+.action-demo-play{
+  position: absolute;
+  width: 20%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: url('../img/play.png') no-repeat center;
+  background-size: contain;
+  opacity: .8;
+  -webkit-animation: move 2s linear infinite;
+          animation: move 2s linear infinite;
+}
+
+.action-demo-fullscreen{
+  position: absolute;
+  right: 0;
+  color: #333334;
+  opacity: 0;
+}
+
+.action-demo-container:hover .action-demo-play{
+  display: none;
+}
+
+.action-demo-container:hover .action-demo-fullscreen{
+  opacity: 1;
+}
+
+.mb0{
+  margin-bottom: 0;
+}
+
+.sub-title-helper{
+  font-size: 60%;
+  color: gray;
+}
+
+.additional-list{
+  max-height: 200px;
+  overflow: auto;
+  margin: 0;
+}
+
+.nowrap{
+  white-space: nowrap;
+}
+
+.text-right{
+  text-align: right;
+}
+
+@-webkit-keyframes move{
+  50% {
+    -webkit-transform: scale(.9);
+            transform: scale(.9);
+  }
+}
+@keyframes move{
+  50% {
+    -webkit-transform: scale(.9);
+            transform: scale(.9);
+  }
+}
+
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

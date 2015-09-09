@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Jets.js</title>
+
+  <!-- CSS  -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize-tags.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/prism.css" rel="stylesheet" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="js/people.js"></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-39553257-5', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter32395320 = new Ya.Metrika({ id:32395320, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/32395320" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</head>
+<body>
+  <a href="https://github.com/NeXTs/Jets.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+  <div class="section no-pad-bot">
+    <div class="container">
+      <h1>
+        Jets<span style="font-size: .4em">.js</span>
+        <span class="jets-header-helper hide-on-small-only">Native CSS search engine</span>
+      </h1>
+      <small class="jets-author">By Denis Lukov, creator of <a href="http://nexts.github.io/Clusterize.js/" target="_blank" rel="nofollow">Clusterize.js</a></small>
+
+      <div class="row">
+        <div class="col s12 m12 l7 search-inputs" id="searchInputs">
+          <div class="card" style="overflow: visible">
+            <div class="card-content">
+              <div class="search-opening-speech-section">
+                <p>
+                  Imagine a situation - your HTML markup renders at backend side, it contains some list of data. At one point you need to implement search by this list. It can be easily achieved by using Jets.js with a browser's native search speed.</p>
+                <p>Click green button to compare speed with other solutions</p>
+              </div>
+              <div class="row materialize-box" id="materializeBox">
+                <div class="col s9 materialize-input-container" id="materializeInputContainer">
+                  <input type="text" value=""  id="tagsList"/>
+                  <div class="progress">
+                    <div class="determinate" id="summaryProgress" style="width: 0"></div>
+                  </div>
+                </div>
+                <div class="col s3 right materialize-button-helper">
+                  <a id="runTestBtn" class="waves-effect waves-light btn right"><i class="material-icons left"></i>Run</a>
+                </div>
+              </div>
+              <div class="search-area">
+                <div class="hidden-search-elem">
+                  <table class="bordered">
+                    <thead>
+                      <tr>
+                        <th style="">Method</th>
+                        <th class="right">Average speed (ms)</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div class="row search-row hidden-search-elem">
+                  <div class="col s10">
+                    <div class="input-field">
+                      <i class="mdi-action-search prefix"></i>
+                      <input id="styleSearch" type="text">
+                      <label for="styleSearch">Search using style</label>
+                      <div class="progress">
+                        <div class="determinate" id="styleProgress" style="width: 0"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s2 speed-badge-container">
+                    <span class="badge new" id="styleAverage">
+                      <div class="crown"></div>
+                      <span>0</span>
+                      <div class="preloader-wrapper big active">
+                        <div class="spinner-layer spinner-blue-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div><div class="gap-patch">
+                            <div class="circle"></div>
+                          </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <div class="row search-row hidden-search-elem">
+                  <div class="col s10">
+                    <div class="input-field">
+                      <i class="mdi-action-search prefix"></i>
+                      <input id="classSearch" type="text">
+                      <label for="classSearch">Search using class</label>
+                      <div class="progress">
+                        <div class="determinate" id="classProgress" style="width: 0"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s2 speed-badge-container">
+                    <span class="badge new" id="classAverage">
+                      <div class="crown"></div>
+                      <span>0</span>
+                      <div class="preloader-wrapper big active">
+                        <div class="spinner-layer spinner-blue-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div><div class="gap-patch">
+                            <div class="circle"></div>
+                          </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+                <div class="row search-row hidden-search-elem">
+                  <div class="col s10">
+                    <div class="input-field">
+                      <i class="mdi-action-search prefix"></i>
+                      <input id="jetsSearch" type="text">
+                      <label for="jetsSearch">Jets search</label>
+                      <div class="progress">
+                        <div class="determinate" id="jetsProgress" style="width: 0"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s2 speed-badge-container">
+                    <span class="badge new" id="jetsAverage">
+                      <div class="crown"></div>
+                      <div class="sunburst-container">
+                        <div class="sunburst"></div>
+                      </div>
+                      <span>0</span>
+                      <div class="preloader-wrapper big active">
+                        <div class="spinner-layer spinner-blue-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div><div class="gap-patch">
+                            <div class="circle"></div>
+                          </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m12 l5">
+          <div class="card" style="min-height: 423px">
+            <div class="card-content">
+              <table class="bordered">
+                <thead>
+                  <tr>
+                    <th style="width:80%;">Name</th>
+                    <th>Age</th>
+                  </tr>
+                </thead>
+              </table>
+              <div style="max-height: 330px; overflow: auto">
+                <table class="bordered">
+                  <tbody id="jetsContent"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m12 l5">
+          <div class="row mb0">
+            <div class="s12 col">
+              <h5>How does it work?</h5>
+              <blockquote>
+                <p>The main idea is not to affect attributes of each tag in the list while filtering. Instead apply dynamic CSS rule in only &lt;style&gt; tag and browser will decide which item of list to show or hide. Since it's just CSS - Jets.js may be applied to any tag, whether it's a table or UL, OL, DIV…</p>
+                In fact, plugin is a wrapper over a simple CSS rule:</p>
+                <pre style="margin-left: -1.5em"><code class="language-css">#jetsContent > :not([data-jets *= "search_query"]){ display:none; }</code></pre>
+                <p>p.s. <a class="modal-trigger" href="#styleSolutionModal">how execution measures were made</a>?</p>
+              </blockquote>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <h5>Works with any tag</h5>
+              <div class="input-field">
+                <input id="additionalListInput" type="text">
+                <label for="additionalListInput">Type something…</label>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <h5>LIST</h5>
+                  <ul class="additional-list" id="additionalListUl"></ul>
+                </div>
+                <div class="col s6">
+                  <h5>DIV</h5>
+                  <div class="additional-list" id="additionalListDiv"></div>
+                </div>
+              </div>
+              <h6>And so on…</h6>
+            </div>
+          </div>
+
+          <div class="row hide-on-large-only">
+            <div class="s12 col action-demo-container">
+              <h5>In action <span class="sub-title-helper">Comparison of affected tags</span></h5>
+              <a class="waves-effect waves-light modal-trigger action-demo-fullscreen" href="#demoModal"><i class="material-icons dp48 small">settings_overscan</i></a>
+              <img src="./img/demo.png" alt="Jets demo" class="action-demo action-demo-toggle">
+              <div class="action-demo-play"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col m12 l7 hide-on-med-and-down action-demo-container">
+          <h5>In action <span class="sub-title-helper">Comparison of affected tags</span></h5>
+          <a class="waves-effect waves-light modal-trigger action-demo-fullscreen" href="#demoModal"><i class="material-icons dp48 small">settings_overscan</i></a>
+          <img src="./img/demo.png" alt="Jets demo" class="action-demo action-demo-toggle">
+          <div class="action-demo-play"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="s12 col">
+          <h5>Quickstart</h5>
+          <div class="row mb0">
+            <div class="col s4">
+              <pre><code class="language-javascript">bower install jets</code></pre>
+            </div>
+            <div class="col s4">
+              <pre><code class="language-javascript">npm install jets</code></pre>
+            </div>
+            <div class="col s4" style="padding-top: 1.4rem">
+              or <a href="https://github.com/NeXTs/Jets.js" target="_blank" rel="nofollow">download from GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="s12 col">
+          <h5>Include it on your page</h5>
+          <pre><code class="language-markup">&#x3C;script&#x20;src&#x3D;&#x22;./jets.min.js&#x22;&#x3E;&#x3C;/script&#x3E;</code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="s12 col">
+          <h5>Usage</h5>
+          <div class="row mb0">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="#exUL">UL</a></li>
+                <li class="tab col s3"><a href="#exDIV">DIV</a></li>
+                <li class="tab col s3"><a href="#exTable">Table</a></li>
+              </ul>
+            </div>
+            <div id="exUL" class="col s12">
+              <div class="row mb0">
+                <div class="s12 m12 l6 col">
+                  <pre><code class="language-markup">&lt;input type="search" id="jetsSearch"&gt;
+&lt;ul id="jetsContent"&gt;
+  &lt;li&gt;Barry Williamson&lt;/li&gt;
+  &lt;li&gt;Francis Reeves&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                </div>
+                <div class="s12 m12 l6 col">
+                    <pre><code class="language-javascript">var jets = new Jets({
+  searchTag: '#jetsSearch',
+  contentTag: '#jetsContent'
+});</code></pre>
+                </div>
+              </div>
+            </div>
+            <div id="exDIV" class="col s12">
+              <div class="row mb0">
+                <div class="s12 m12 l6 col">
+                  <pre><code class="language-markup">&lt;input type="search" id="jetsSearch"&gt;
+&lt;div id="jetsContent"&gt;
+  &lt;div&gt;Barry Williamson&lt;/div&gt;
+  &lt;div&gt;Francis Reeves&lt;/div&gt;
+  &lt;div&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="s12 m12 l6 col">
+                    <pre><code class="language-javascript">var jets = new Jets({
+  searchTag: '#jetsSearch',
+  contentTag: '#jetsContent'
+});</code></pre>
+                </div>
+              </div>
+            </div>
+            <div id="exTable" class="col s12">
+              <div class="row mb0">
+                <div class="s12 m12 l6 col">
+                  <pre><code class="language-markup">&lt;input type="search" id="jetsSearch"&gt;
+&lt;table&gt;
+  &lt;tbody id="jetsContent"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Barry Williamson&lt;/td&gt;
+      &lt;td&gt;31&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Francis Reeves&lt;/td&gt;
+      &lt;td&gt;26&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;…&lt;/td&gt;
+      &lt;td&gt;…&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+                <div class="s12 m12 l6 col">
+                    <pre><code class="language-javascript">var jets = new Jets({
+  searchTag: '#jetsSearch',
+  contentTag: '#jetsContent',
+  cols: [0] // optional, search by first column only
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h5>Options</h5>
+          <table class="striped bordered">
+            <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                  <th>Example</th>
+                  <th>Default</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>searchTag</td>
+                <td><b>Required</b></td>
+                <td>Selector for search input tag. Refers to document.querySelector()</td>
+                <td>'#searchInput'</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>contentTag</td>
+                <td><b>Required</b></td>
+                <td>Selector for content tag. Refers to document.querySelector()</td>
+                <td>'#jetsContent'</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>columns</td>
+                <td>Optional</td>
+                <td>In the case of a table, you can specify certain columns for search</td>
+                <td>[1, 2]</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>addImportant</td>
+                <td>Optional</td>
+                <td>Specifies whether to add !important to the CSS search query</td>
+                <td>true</td>
+                <td>false</td>
+              </tr>
+              <tr>
+                <td>searchSelector</td>
+                <td>Optional</td>
+                <td>
+                  Specifies search rule <sup><a href="http://www.w3schools.com/cssref/css_selectors.asp" target="_blank" rel="nofollow">read more</a></sup>
+                  <ul>
+                    <li><b>*</b> - Selects elements whose values contains the search substring</li>
+                    <li><b>^</b> - Selects elements whose values begins with the search phrase</li>
+                    <li><b>$</b> - Selects elements whose values ends with search phrase</li>
+                    <li><b>~</b> - Selects elements whose values contains the search phrase (exact match)</li>
+                    <li><b>|</b> - Selects elements whose values begins with the search phrase (exact match)</li>
+                  </ul>
+                </td>
+                <td>~</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>manualContentHandling</td>
+                <td>Optional</td>
+                <td>Allows you to manually process elements and specify the search phrases. It may be useful when necessary to look at the content of only one child element, or by it's attribute, etc.. Function contains one argument - DOM node of row tag</td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#manualContentHandlingModal"><i class="material-icons dp48">code</i></a>
+                </td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#manualContentHandlingDefaultModal"><i class="material-icons dp48">code</i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <h5>Methods</h5>
+          <table class="striped bordered">
+            <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Params</th>
+                  <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap">.update()</td>
+                <td><b>Boolean</b></td>
+                <td>
+                  Updates "Jets attributes" which used for search. This method should be called after adding new items to the list or changing values of some of them. By default .update() would process only rows <b>without "data-jets"</b> attribute for performance reasons. So if you've added new rows, .update() will process them cause they don't have "data-jets" attribute yet. If you have changed content of some rows, remove their "data-jets" attributes and call .update(). If you need to forcibly update all tags in spite of everything, set parameter as <b>true</b>.
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">.destroy()</td>
+                <td></td>
+                <td>Destroys Jets instance</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m4">
+          <h5>Tests</h5>
+          <p>To run the test suite, first install the dependencies, then run npm test:</p>
+          <pre><code class="language-markup">npm install
+npm test</code></pre>
+        </div>
+        <div class="col s12 m4">
+          <h5>Changelog</h5>
+          <ul>
+            <li>0.0.0 Initial</li>
+          </ul>
+        </div>
+        <div class="col s12 m4">
+          <h5>Browsers support</h5>
+          <ul>
+            <li>IE 9+</li>
+            <li>All Modern browsers</li>
+            <li>Mobile browsers</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h5>Author</h5>
+          <div class="row">
+            <div class="col s6">
+              Denis Lukov [ <a href="https://github.com/NeXTs" target="_blank" rel="nofollow">GitHub</a> | <a href="https://ua.linkedin.com/pub/denis/58/13b/668" target="_blank" rel="nofollow">LinkedIn</a> ]
+            </div>
+            <div class="col s6 text-right">
+              Licensed under the MIT license
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modals">
+    <!-- Modal Structure -->
+    <div id="demoModal" class="modal">
+      <div class="modal-content">
+        <img src="./img/demo_hover.gif" alt="Jets demo" class="action-demo">
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+    <div id="manualContentHandlingModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>In case you want to fetch data from tag's attribute</p>
+        <pre><code class="language-javascript">manualContentHandling: function(tag) {
+  return tag.getAttribute('custom');
+}</code></pre>
+      </div>
+    </div>
+    <div id="manualContentHandlingDefaultModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>Default implementation mostly depends on provided options but in simplest way this looks as follows</p>
+        <pre><code class="language-javascript">manualContentHandling: function(tag) {
+  return tag && (tag.innerText || tag.textContent) || '';
+}</code></pre>
+      </div>
+    </div>
+    <div id="styleSolutionModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>Pseudocode for measuring the execution speed of the various implementations</p>
+        <pre><code class="language-javascript">var intervals = [];
+$('#searchInput').on('input', function() {
+  var time_start = performance.now();
+
+  // filter the list by condition $(this).val()…
+
+  // wait for main UI thread queue to be performed
+  setTimeout(function() {
+    var time_end = performance.now();
+    intervals.push(time_end - time_start);
+
+    // get average execution time
+    var average_execution_time = intervals.reduce(function(total, item) {
+      return total + item;
+    }, 0) / intervals.length;
+  }, 0);
+});</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!--  Scripts-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+  <script src="js/materialize-tags.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/async/1.4.2/async.min.js"></script>
+  <script src="js/devtools-detect.js"></script>
+  <script src="js/prism.js"></script>
+  <script src="js/jets.js"></script>
+  <script src="js/init.js"></script>
+  
+  </body>
+</html>
