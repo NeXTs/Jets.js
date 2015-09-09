@@ -306,8 +306,5 @@ $(function() {
   });
 
   $('.modal-trigger').leanModal();
-
-  $(window).load(function() {
-    $('#materializeInputContainer').fadeIn();
-  });
+  $('#materializeInputContainer').fadeIn();
 });
