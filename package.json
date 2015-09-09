@@ -21,9 +21,9 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "jquery": "^2.1.4",
-    "mocha": "^2.3.0",
+    "mocha": "^2.3.2",
     "mocha-phantomjs": "^3.6.0",
-    "phantomjs": "^1.9.7-15"
+    "phantomjs": "1.9.7-15"
   },
   "bugs": {
     "url": "https://github.com/NeXTs/Jets.js/issues"
