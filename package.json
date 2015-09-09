@@ -1,0 +1,32 @@
+{
+  "name": "jets.js",
+  "version": "0.0.0",
+  "description": "Native CSS search engine",
+  "main": "jets.min.js",
+  "scripts": {
+    "test": "mocha-phantomjs ./test/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NeXTs/Jets.js.git"
+  },
+  "keywords": [
+    "css",
+    "search",
+    "list",
+    "jets"
+  ],
+  "author": "Denis Lukov <denismassters@gmail.com> (https://github.com/NeXTs)",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "jquery": "^2.1.4",
+    "mocha": "^2.3.0",
+    "mocha-phantomjs": "^3.6.0",
+    "phantomjs": "^1.9.7-15"
+  },
+  "bugs": {
+    "url": "https://github.com/NeXTs/Jets.js/issues"
+  },
+  "homepage": "https://github.com/NeXTs/Jets.js"
+}

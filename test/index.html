@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jets.js tests</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>
+    mocha.setup('bdd');
+    var assert = chai.assert;
+  </script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../jets.min.js"></script>
+</head>
+<body>
+  <div id="container">
+    <input type="text" id="jetsSearch">
+    <table>
+      <tbody id="jetsContent"></tbody>
+    </table>
+  </div>
+  <script src="test.js"></script>
+  <div id="mocha"></div>
+  <script>
+    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+    else {mocha.run();}
+  </script>
+</body>
+</html>
