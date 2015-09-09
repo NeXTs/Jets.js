@@ -1,5 +1,5 @@
 {
-  "name": "jets.js",
+  "name": "jets",
   "version": "0.0.0",
   "description": "Native CSS search engine",
   "main": "jets.min.js",
