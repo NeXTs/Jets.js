@@ -143,9 +143,7 @@ $(function() {
       element.dispatchEvent(ev);
     },
     clearListFromAdditionalAttributes: function() {
-      console.time('clear')
       $mainDemoContentArea.children().removeAttr('style class');
-      console.timeEnd('clear')
     },
     setProgress: function(index, mode, phrase) {
       var progress = ((index+1) / tutorial.search_phrases.length * 100),

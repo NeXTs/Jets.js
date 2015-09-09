@@ -113,18 +113,18 @@
   top: -2px;
   z-index: 2;
   opacity: 0;
-  transition:         all 0s linear;
   -webkit-transition: all 0s linear;
   -moz-transition:    all 0s linear;
   -o-transition:      all 0s linear;
+  transition:         all 0s linear;
 }
 .crown.show{
   top: -22px;
   opacity: 1;
-  transition:       all 0.2s ease-out;
   -webkit-transition: all 0.2s ease-out;
   -moz-transition:    all 0.2s ease-out;
   -o-transition:      all 0.2s ease-out;
+  transition:       all 0.2s ease-out;
 }
 
 .sunburst-container{
@@ -137,18 +137,18 @@
   -webkit-transform: translate(-25%);
       -ms-transform: translate(-25%);
           transform: translate(-25%);
-  transition:         opacity 0s linear;
   -webkit-transition: opacity 0s linear;
   -moz-transition:    opacity 0s linear;
   -o-transition:      opacity 0s linear;
+  transition:         opacity 0s linear;
 }
 
 .sunburst-container.show{
   opacity: .5;
-  transition:       opacity 0.5s ease-out;
   -webkit-transition: opacity 0.5s ease-out;
   -moz-transition:    opacity 0.5s ease-out;
   -o-transition:      opacity 0.5s ease-out;
+  transition:       opacity 0.5s ease-out;
 }
 
 .sunburst{
