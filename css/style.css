@@ -218,6 +218,10 @@
   white-space: nowrap;
 }
 
+.text-center{
+  text-align: center;
+}
+
 .text-right{
   text-align: right;
 }
