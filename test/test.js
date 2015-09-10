@@ -86,7 +86,7 @@ describe('Jets', function() {
 
     it('Shoud add style tag after init', function() {
       jet = new Jets(ext({}));
-      assert.isTrue($search.prev().is('style'));
+      assert.lengthOf($('head').find(jet.styleTag), 1);
     })
 
     it('Should add "data-jets" attribute', function() {
@@ -103,8 +103,8 @@ describe('Jets', function() {
 
     it('Shoud remove style tag after destroy', function() {
       jet = new Jets(ext({}));
-      jet.destroy()
-      assert.isFalse($search.prev().is('style'));
+      jet.destroy();
+      assert.lengthOf($('head').find(jet.styleTag), 0);
     })
 
     it('Should remove "data-jets" attribute', function() {
