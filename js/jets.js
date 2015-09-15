@@ -1,4 +1,4 @@
-/*! Jets.js - v0.1.0 - 2015-09-10
+/*! Jets.js - v0.2.0 - 2015-09-15
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -13,7 +13,6 @@
     if( ! (this instanceof Jets)) {
       return new Jets(opts);
     }
-
     var self = this;
     ['searchTag', 'contentTag'].forEach(function(param) {
       var name = param.replace('Tag', '');
@@ -24,10 +23,19 @@
       }
     });
 
+    var defaults = {
+      searchSelector: '*AND'
+    }
+
     self.options = {};
     ['columns', 'addImportant', 'searchSelector', 'manualContentHandling'].forEach(function(name) {
-      self.options[name] = opts[name];
+      self.options[name] = opts[name] || defaults[name];
     });
+    if(this.options.searchSelector.length > 1) {
+      var searchSelector = self.options['searchSelector'].trim();
+      self.options.searchSelector = searchSelector.substr(0, 1);
+      self.options.searchSelectorMode = searchSelector.substr(1).toUpperCase();
+    }
 
     var last_search_query,
     callSearch = function() {
@@ -58,10 +66,19 @@
       }.bind(this));
     },
     _applyCSS: function() {
-      var value = this.search_tag.value.trim().toLowerCase(),
-      css = this.content_param + '>:not([data-jets' + (this.options.searchSelector || '*') +
-        '="' + value + '"]){display:none' + (this.options.addImportant ? '!important' : '') + '}';
-      this.styleTag.innerHTML = value ? css : '';
+      var search_phrase = this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' '),
+        words = this.options.searchSelectorMode
+          ? search_phrase.split(' ').filter(function(item, pos, arr) { return arr.indexOf(item) == pos; })
+          : [search_phrase],
+        is_strict_selector = this.options.searchSelectorMode == 'AND',
+        selectors = [];
+      for(var i = 0, ii = words.length; i < ii; i++) {
+        selectors.push((is_strict_selector ? this.content_param + '>' : '') + ':not([data-jets' +
+          this.options.searchSelector + '="' + words[i] + '"])');
+      }
+      var css_rule = (is_strict_selector ? '' : this.content_param + '>') + selectors.join(is_strict_selector ? ',' : '') +
+        '{display:none' + (this.options.addImportant ? '!important' : '') + '}';
+      this.styleTag.innerHTML = search_phrase.length ? css_rule : '';
     },
     _addStyleTag: function() {
       this.styleTag = document.createElement('style');

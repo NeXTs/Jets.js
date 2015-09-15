@@ -281,9 +281,7 @@ $(function() {
 
   var jets = new Jets({
     searchTag: '#jetsSearch',
-    contentTag: '#jetsContent',
-    searchSelector: '*',
-    addImportant: false
+    contentTag: '#jetsContent'
   });
   tutorial.initTags();
   tutorial.initCleaner();

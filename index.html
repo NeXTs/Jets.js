@@ -394,15 +394,18 @@
                 <td>
                   Specifies search rule <sup><a href="http://www.w3schools.com/cssref/css_selectors.asp" target="_blank" rel="nofollow">read more</a></sup>
                   <ul>
+                    <li><b>*AND</b> - Selects elements whose values contains the search substring (exact match, typed in any order)</li>
+                    <li><b>*OR</b> - Selects elements whose values contains at least one part of search substring</li>
                     <li><b>*</b> - Selects elements whose values contains the search substring</li>
                     <li><b>^</b> - Selects elements whose values begins with the search phrase</li>
                     <li><b>$</b> - Selects elements whose values ends with search phrase</li>
                     <li><b>~</b> - Selects elements whose values contains the search phrase (exact match)</li>
                     <li><b>|</b> - Selects elements whose values begins with the search phrase (exact match)</li>
                   </ul>
+                  <a class="waves-effect waves-light modal-trigger" href="#demoSelectorsModal">Watch a difference between <b>*</b> selectors</a>
                 </td>
                 <td>~</td>
-                <td>*</td>
+                <td>*AND</td>
               </tr>
               <tr>
                 <td>manualContentHandling</td>
@@ -458,6 +461,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.2.0 Implemented *AND and *OR selectors</li>
             <li>0.1.0 Moved style tag to head</li>
             <li>0.0.0 Initial</li>
           </ul>
@@ -491,6 +495,19 @@ npm test</code></pre>
 
   <div class="modals">
     <!-- Modal Structure -->
+    <div id="demoSelectorsModal" class="modal">
+      <div class="modal-content">
+        <h5>*AND</h5>
+        <p>Will find [Mikki Doe] in [Mikki Rurk, John Doe, Mike Vazovsky, Mikki Doe] by search phrase "Doe Mikki" or even "Do ikki"</p>
+        <h5>*OR</h5>
+        <p>Will find [Mikki Rurk, John Doe, Mikki Doe] in [Mikki Rurk, John Doe, Mike Vazovsky, Mikki Doe] by search phrase "Doe Mikki" or even "Do ikki"</p>
+        <h5>*</h5>
+        <p>Will find [Mikki Doe] in [Mikki Rurk, John Doe, Mike Vazovsky, Mikki Doe] by search phrase "ikki Do" (only in this sequence)</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
     <div id="demoModal" class="modal">
       <div class="modal-content">
         <img src="./img/demo_hover.gif" alt="Jets demo" class="action-demo">
