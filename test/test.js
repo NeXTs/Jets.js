@@ -1,6 +1,6 @@
 describe('Jets', function() {
 
-  var people = ['John', 'Mike', 'Alex', 'Alice', 'Denis'],
+  var people = ['John Doe', 'Mike Doe', 'Alex Smith', 'Alice Vazovsky', 'Denis Koen'],
     $search = $('#jetsSearch'),
     searchNode = $search.get(0),
     $content = $('#jetsContent');
@@ -187,6 +187,66 @@ describe('Jets', function() {
     for(var i = 0, ii = selectors.length; i < ii; i++) {
       execute(selectors[i]);
     }
+
+    it('Should find one result with * selector', function() {
+
+      jet = new Jets(ext({
+        searchSelector: '*'
+      }));
+      make(function() {
+        $search.val('John Doe');
+      })
+      assert.lengthOf($content.children(':visible'), 1);
+
+    })
+
+    it('Should hide all results with * selector and mixed words', function() {
+
+      jet = new Jets(ext({
+        searchSelector: '*'
+      }));
+      make(function() {
+        $search.val('Doe John');
+      })
+      assert.lengthOf($content.children(':visible'), 0);
+
+    })
+
+    it('Should find one result with *AND selector and mixed words', function() {
+
+      jet = new Jets(ext({
+        searchSelector: '*AND'
+      }));
+      make(function() {
+        $search.val('Doe John');
+      })
+      assert.lengthOf($content.children(':visible'), 1);
+
+    })
+
+    it('Should find one result with *AND selector and part of word', function() {
+
+      jet = new Jets(ext({
+        searchSelector: '*AND'
+      }));
+      make(function() {
+        $search.val('John oe');
+      })
+      assert.lengthOf($content.children(':visible'), 1);
+
+    })
+
+    it('Should find three results with *OR selector and part of word', function() {
+
+      jet = new Jets(ext({
+        searchSelector: '*OR'
+      }));
+      make(function() {
+        $search.val('John oe');
+      })
+      assert.lengthOf($content.children(':visible'), 3);
+
+    })
 
   })
 
