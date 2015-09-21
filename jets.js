@@ -1,4 +1,4 @@
-/*! Jets.js - v0.2.0 - 2015-09-15
+/*! Jets.js - v0.3.0 - 2015-09-21
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -15,8 +15,9 @@
     }
     var self = this;
     ['searchTag', 'contentTag'].forEach(function(param) {
-      var name = param.replace('Tag', '');
-      self[name + '_tag'] = document.querySelector(opts[param]);
+      var name = param.replace('Tag', ''),
+        queryMethod = 'querySelector' + (param == 'contentTag' ? 'All' : '');
+      self[name + '_tag'] = document[queryMethod](opts[param]);
       self[name + '_param'] = opts[param];
       if( ! self[name + '_tag']) {
         throw new Error('Error! Could not find ' + param + ' element');
@@ -88,7 +89,9 @@
       return tag && (tag.innerText || tag.textContent) || '';
     },
     _getContentTags: function(query) {
-      return Array.prototype.slice.call(this.content_tag.querySelectorAll(query || ':scope > *'));
+      return Array.prototype.slice.call(this.content_tag).reduce(function(all, elem) {
+        return all.concat(Array.prototype.slice.call(elem.querySelectorAll(query || ':scope > *')));
+      }, []);
     },
     _setJets: function(query, force) {
       var self = this,
