@@ -208,6 +208,7 @@
           </div>
           <div class="row">
             <div class="col s12">
+              <a name="multitag"></a>
               <h5>Works with any tag</h5>
               <div class="input-field">
                 <input id="additionalListInput" type="text">
@@ -370,7 +371,7 @@
               <tr>
                 <td>contentTag</td>
                 <td><b>Required</b></td>
-                <td>Selector for content tag. Refers to document.querySelector()</td>
+                <td>Selector for content tag. Refers to document.querySelectorAll() so many lists can be processed at one time. For example '.list' where page contains two tags ul.list. See example at "<a href="#multitag">Works with any list</a>"</td>
                 <td>'#jetsContent'</td>
                 <td></td>
               </tr>
