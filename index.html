@@ -419,6 +419,15 @@
                   <a class="waves-effect waves-light modal-trigger" href="#manualContentHandlingDefaultModal"><i class="material-icons dp48">code</i></a>
                 </td>
               </tr>
+              <tr>
+                <td>diacriticsMap</td>
+                <td>Optional</td>
+                <td>Allows you to specify diacritics map for replacing diacritics "ă ş ţ" to their normal form "a s t". For a syntax example take a look at example on the right</td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#diacriticsExampleModal"><i class="material-icons dp48">code</i></a>
+                </td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -462,6 +471,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.4.0 Implemened support of diacritics</li>
             <li>0.3.0 Added multi-tag support for contentTag</li>
             <li>0.2.0 Implemented *AND and *OR selectors</li>
             <li>0.1.0 Moved style tag to head</li>
@@ -497,6 +507,30 @@ npm test</code></pre>
 
   <div class="modals">
     <!-- Modal Structure -->
+    <div id="diacriticsExampleModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>This map will find "Larson" in the list by typing "Łąřśøń" and vice versa.</p>
+        <pre><code class="language-javascript">diacriticsMap: {
+  a: 'ÀÁÂÃÄÅàáâãäåĀāąĄ',
+  c: 'ÇçćĆčČ',
+  d: 'đĐďĎ',
+  e: 'ÈÉÊËèéêëěĚĒēęĘ',
+  i: 'ÌÍÎÏìíîïĪī',
+  l: 'łŁ',
+  n: 'ÑñňŇńŃ',
+  o: 'ÒÓÔÕÕÖØòóôõöøŌō',
+  r: 'řŘ',
+  s: 'ŠšśŚ',
+  t: 'ťŤ',
+  u: 'ÙÚÛÜùúûüůŮŪū',
+  y: 'ŸÿýÝ',
+  z: 'ŽžżŻźŹ'
+}</code></pre>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
     <div id="demoSelectorsModal" class="modal">
       <div class="modal-content">
         <h5>*AND</h5>
