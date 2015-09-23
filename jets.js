@@ -1,4 +1,4 @@
-/*! Jets.js - v0.3.0 - 2015-09-21
+/*! Jets.js - v0.4.0 - 2015-09-23
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -25,11 +25,12 @@
     });
 
     var defaults = {
-      searchSelector: '*AND'
+      searchSelector: '*AND',
+      diacriticsMap: {}
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'diacriticsMap'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -67,7 +68,7 @@
       }.bind(this));
     },
     _applyCSS: function() {
-      var search_phrase = this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' '),
+      var search_phrase = this.replaceDiacritics(this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' ')),
         words = this.options.searchSelectorMode
           ? search_phrase.split(' ').filter(function(item, pos, arr) { return arr.indexOf(item) == pos; })
           : [search_phrase],
@@ -105,8 +106,17 @@
                 return self._getText(tag.children[column]);
               }).join(' ')
             : self._getText(tag);
-        tag.setAttribute('data-jets', text.trim().replace(/\s+/g, ' ').toLowerCase());
+        tag.setAttribute('data-jets', self.replaceDiacritics(text.trim().replace(/\s+/g, ' ').toLowerCase()));
       };
+    },
+    replaceDiacritics: function(text) {
+      var diacritics = this.options.diacriticsMap;
+      for(var letter in diacritics) if(diacritics.hasOwnProperty(letter)) {
+        for(var i = 0, ii = diacritics[letter].length; i < ii; i++) {
+          text = text.replace(new RegExp(diacritics[letter][i], 'g'), letter);
+        }
+      }
+      return text;
     },
     update: function(force) {
       this._setJets(':scope > :not([data-jets])', force);
