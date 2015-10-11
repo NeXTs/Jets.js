@@ -1,4 +1,4 @@
-/*! Jets.js - v0.4.0 - 2015-09-23
+/*! Jets.js - v0.5.0 - 2015-10-11
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -30,7 +30,7 @@
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'diacriticsMap'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'diacriticsMap', 'didSearch'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -41,8 +41,10 @@
 
     var last_search_query,
     callSearch = function() {
-      if(last_search_query != (last_search_query = self.search_tag.value))
+      if(last_search_query != (last_search_query = self.search_tag.value)) {
         self._applyCSS();
+        self.options.didSearch && self.options.didSearch(self.search_tag.value);
+      }
     };
     self._onSearch = function(event) {
       if(event.type == 'keydown')
