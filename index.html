@@ -420,6 +420,17 @@
                 </td>
               </tr>
               <tr>
+                <td>didSearch</td>
+                <td>Optional</td>
+                <td>Callbach function that will be called right after applying new CSS rule. Provides single argument with last search phrase.</td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#didSearchModal"><i class="material-icons dp48">code</i></a>
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
                 <td>diacriticsMap</td>
                 <td>Optional</td>
                 <td>Allows you to specify diacritics map for replacing <a href="https://en.wikipedia.org/wiki/Diacritic" target="_blank" rel="nofollow">diacritics</a> "ă ş ţ" to their normal form "a s t". For a syntax example take a look at example on the right</td>
@@ -471,6 +482,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.5.0 Added didSeach callback</li>
             <li>0.4.0 Implemened support of diacritics</li>
             <li>0.3.0 Added multi-tag support for contentTag</li>
             <li>0.2.0 Implemented *AND and *OR selectors</li>
@@ -554,6 +566,13 @@ npm test</code></pre>
         <p>In case you want to fetch data from tag's attribute</p>
         <pre><code class="language-javascript">manualContentHandling: function(tag) {
   return tag.getAttribute('custom');
+}</code></pre>
+      </div>
+    </div>
+    <div id="didSearchModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <pre><code class="language-javascript">didSearch: function(search_phrase) {
+  console.log(search_phrase);
 }</code></pre>
       </div>
     </div>
