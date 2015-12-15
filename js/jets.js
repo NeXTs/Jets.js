@@ -1,4 +1,4 @@
-/*! Jets.js - v0.5.0 - 2015-10-11
+/*! Jets.js - v0.6.0 - 2015-12-15
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -89,7 +89,7 @@
       document.head.appendChild(this.styleTag);
     },
     _getText: function(tag) {
-      return tag && (tag.innerText || tag.textContent) || '';
+      return tag && (tag.textContent || tag.innerText) || '';
     },
     _getContentTags: function(query) {
       return Array.prototype.slice.call(this.content_tag).reduce(function(all, elem) {
