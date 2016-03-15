@@ -266,4 +266,18 @@ describe('Jets', function() {
 
   })
 
+  describe('invert option', function() {
+
+    it('Should invert results', function() {
+      jet = new Jets(ext({
+        invert: true
+      }));
+      make(function() {
+        $search.val(people[0]);
+      })
+      assert.lengthOf($content.children(':visible'), 3);
+    })
+
+  })
+
 })

@@ -1,4 +1,4 @@
-/*! Jets.js - v0.6.0 - 2015-12-15
+/*! Jets.js - v0.7.0 - 2016-03-16
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -30,7 +30,7 @@
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'diacriticsMap', 'didSearch'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -77,8 +77,8 @@
         is_strict_selector = this.options.searchSelectorMode == 'AND',
         selectors = [];
       for(var i = 0, ii = words.length; i < ii; i++) {
-        selectors.push((is_strict_selector ? this.content_param + '>' : '') + ':not([data-jets' +
-          this.options.searchSelector + '="' + words[i] + '"])');
+        selectors.push((is_strict_selector ? this.content_param + '>' : '') + (this.options.invert ? '' : ':not(') + '[data-jets' +
+          this.options.searchSelector + '="' + words[i] + '"]' + (this.options.invert ? '' : ')'));
       }
       var css_rule = (is_strict_selector ? '' : this.content_param + '>') + selectors.join(is_strict_selector ? ',' : '') +
         '{display:none' + (this.options.addImportant ? '!important' : '') + '}';
