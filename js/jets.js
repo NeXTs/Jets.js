@@ -1,12 +1,12 @@
-/*! Jets.js - v0.7.0 - 2016-03-16
+/*! Jets.js - v0.8.0 - 2016-03-31
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
-;(function(name, definition) {
+;(function(root, definition) {
   if (typeof module != 'undefined') module.exports = definition();
   else if (typeof define == 'function' && typeof define.amd == 'object') define(definition);
-  else this[name] = definition();
-}('Jets', function() {
+  else root['Jets'] = definition();
+}(this, function() {
   "use strict"
 
   function Jets(opts) {
