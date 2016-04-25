@@ -1,6 +1,6 @@
 {
-  "name": "jetsExt",
-  "version": "0.8.0",
+  "name": "jets",
+  "version": "0.9.0",
   "description": "Native CSS search engine",
   "main": "jets.min.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:seokirill/JetsExt.js.git"
+    "url": "git@github.com:NeXTs/Jets.js.git"
   },
   "keywords": [
     "css",
@@ -16,7 +16,7 @@
     "list",
     "jets"
   ],
-  "author": "Kovalev Kirill <seokirillstarsnab@gmail.com> (https://github.com/seokirill)",
+  "author": "Denis Lukov <denismassters@gmail.com> (https://github.com/NeXTs)",
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.2.0",
@@ -26,7 +26,7 @@
     "phantomjs": "2.1.7"
   },
   "bugs": {
-    "url": "https://github.com/seokirill/JetsExt.js/issues"
+    "url": "https://github.com/NeXTs/Jets.js/issues"
   },
-  "homepage": "https://github.com/seokirill/JetsExt.js"
+  "homepage": "https://github.com/NeXTs/Jets.js"
 }

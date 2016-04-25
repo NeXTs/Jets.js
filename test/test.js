@@ -280,4 +280,29 @@ describe('Jets', function() {
 
   })
 
+  describe('callSearchManually option', function() {
+
+    it('Should not call search on typing', function() {
+      jet = new Jets(ext({
+        callSearchManually: true
+      }));
+      make(function() {
+        $search.val(people[0]);
+      })
+      assert.lengthOf($content.children(':visible'), 5);
+    })
+
+    it('Should call search by manual calling .search', function() {
+      jet = new Jets(ext({
+        callSearchManually: true
+      }));
+      make(function() {
+        $search.val(people[0]);
+      })
+      jet.search();
+      assert.lengthOf($content.children(':visible'), 1);
+    })
+
+  })
+
 })
