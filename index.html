@@ -428,15 +428,20 @@
                 </td>
               </tr>
               <tr>
+                <td>callSearchManually</td>
+                <td>Optional</td>
+                <td>Do not attach event listeners at searchTag. Allows you to call search manually (by calling .search()). May be especially usefull for cases when handling huge lists.</td>
+                <td>true</td>
+                <td>false</td>
+              </tr>
+              <tr>
                 <td>didSearch</td>
                 <td>Optional</td>
                 <td>Callback function that will be called right after applying new CSS rule. Provides single argument with last search phrase.</td>
                 <td>
                   <a class="waves-effect waves-light modal-trigger" href="#didSearchModal"><i class="material-icons dp48">code</i></a>
                 </td>
-                <td>
-                  
-                </td>
+                <td></td>
               </tr>
               <tr>
                 <td>diacriticsMap</td>
@@ -479,6 +484,11 @@
                 </td>
               </tr>
               <tr>
+                <td class="nowrap">.search()</td>
+                <td></td>
+                <td>Triggers search. May be useful in pair with callSearchManually option.</td>
+              </tr>
+              <tr>
                 <td class="nowrap">.destroy()</td>
                 <td></td>
                 <td>Destroys Jets instance</td>
@@ -497,6 +507,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.9.0 Added callSearchManually option</li>
             <li>0.8.0 Fixed IFFY root context</li>
             <li>0.7.0 Added invert option</li>
             <li>0.6.0 Prefer .textContent over .innerText</li>

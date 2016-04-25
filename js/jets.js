@@ -1,4 +1,4 @@
-/*! Jets.js - v0.8.0 - 2016-03-31
+/*! Jets.js - v0.9.0 - 2016-04-26
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -30,7 +30,7 @@
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'callSearchManually', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -39,24 +39,23 @@
       self.options.searchSelectorMode = searchSelector.substr(1).toUpperCase();
     }
 
-    var last_search_query,
-    callSearch = function() {
-      if(last_search_query != (last_search_query = self.search_tag.value)) {
-        self._applyCSS();
-        self.options.didSearch && self.options.didSearch(self.search_tag.value);
-      }
+    var last_search_query;
+    self.search = function() {
+      if(last_search_query == (last_search_query = self.search_tag.value)) return;
+      self._applyCSS();
+      self.options.didSearch && self.options.didSearch(self.search_tag.value);
     };
     self._onSearch = function(event) {
       if(event.type == 'keydown')
-        return setTimeout(callSearch, 0);
-      callSearch();
+        return setTimeout(self.search, 0);
+      self.search();
     };
     self.destroy = function() {
-      self._processEventListeners('remove');
+      if( ! self.options.callSearchManually) self._processEventListeners('remove');
       self._destroy();
     };
 
-    self._processEventListeners('add');
+    if( ! self.options.callSearchManually) self._processEventListeners('add');
     self._addStyleTag();
     self._setJets();
     self._applyCSS();
