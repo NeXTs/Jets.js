@@ -21,7 +21,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "jquery": "^2.1.4",
-    "mocha": "^2.3.2",
+    "mocha": "^2.5.2",
     "mocha-phantomjs": "^4.0.2",
     "phantomjs": "2.1.7"
   },
