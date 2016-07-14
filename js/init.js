@@ -299,4 +299,78 @@ $(function() {
 
   $('.modal-trigger').leanModal();
   $('#materializeInputContainer').fadeIn();
+
+  function fillTweets(amount) {
+    var userLang = (navigator.language || navigator.userLanguage).toLowerCase(),
+    tweets = shuffle([
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Jets.js Native CSS search engine  <a href="http://t.co/PU9QWE8YRH">http://t.co/PU9QWE8YRH</a> - do people do filtering like that?</p>&mdash; (((Chris Heilmann))) (@codepo8) <a href="https://twitter.com/codepo8/status/642090324245000192">September 10, 2015</a></blockquote>'},
+      {lang: 'ja', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="ja" dir="ltr">高速なインクリメンタルサーチ的なJSライブラリ → Jets.js - Native CSS search engine (Denis Lukov)<a href="http://t.co/B0qNCBsPDi">http://t.co/B0qNCBsPDi</a></p>&mdash; dotHTML5 (@dotHTML5) <a href="https://twitter.com/dotHTML5/status/647002539733426177">September 24, 2015</a></blockquote>'},
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Clever use of the browser for blazingly fast front-end filtering: <a href="http://t.co/ILvuRSzQ3d">http://t.co/ILvuRSzQ3d</a>.</p>&mdash; Hugo Giraudel (@HugoGiraudel) <a href="https://twitter.com/HugoGiraudel/status/644457289404055552">September 17, 2015</a></blockquote>'},
+      {lang: 'ru', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="ru" dir="ltr">Jets.js, фильтрует списки на клиенте очень быстро с помощью CSS-селекторов по атрибутам — <a href="http://t.co/K5qdUBwVfT">http://t.co/K5qdUBwVfT</a> <a href="http://t.co/Zylhzv1pZM">pic.twitter.com/Zylhzv1pZM</a></p>&mdash; Веб-стандарты (@webstandards_ru) <a href="https://twitter.com/webstandards_ru/status/644073329633198080">September 16, 2015</a></blockquote>'},
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Jets.js: Native <a href="https://twitter.com/hashtag/CSS?src=hash">#CSS</a> search engine - <a href="http://t.co/byxdJLu3Ou">http://t.co/byxdJLu3Ou</a></p>&mdash; Jonathan Torke (@JonathanTorke) <a href="https://twitter.com/JonathanTorke/status/648949396738936832">September 29, 2015</a></blockquote>'},
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Jets.js Native CSS search engine <a href="http://t.co/hmj39C4Xtt">http://t.co/hmj39C4Xtt</a> <a href="http://t.co/zV40OBzmPv">pic.twitter.com/zV40OBzmPv</a></p>&mdash; Beyond The Desktop (@bdconf) <a href="https://twitter.com/bdconf/status/651025773709516800">October 5, 2015</a></blockquote>'},
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Jets.js is a <a href="https://twitter.com/hashtag/javascript?src=hash">#javascript</a> library to create native#CSS search engine - <a href="https://t.co/9uS5g6TDOD">https://t.co/9uS5g6TDOD</a></p>&mdash; Ibrahim Jabbari (@ibrahim_jabbari) <a href="https://twitter.com/ibrahim_jabbari/status/657749414761533440">October 24, 2015</a></blockquote>'},
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Jets.js: A native CSS search engine <a href="https://t.co/Jc3swSXoYx">https://t.co/Jc3swSXoYx</a></p>&mdash; Webdesigner Depot (@DesignerDepot) <a href="https://twitter.com/DesignerDepot/status/659361745618804736">October 28, 2015</a></blockquote>'},
+      {lang: 'ja', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="ja" dir="ltr">JavaScript：CSSのセレクターを使ってフィルタリング検索を実装するライブラリー【Jets.js】 <a href="https://t.co/dUg3RqwBR8">https://t.co/dUg3RqwBR8</a></p>&mdash; Webクリエイター ボックス (@webcreatorbox) <a href="https://twitter.com/webcreatorbox/status/659536560514318336">October 29, 2015</a></blockquote>'},
+      {lang: 'en', used: false, markup: '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Interesting concept, using CSS to implement a tagging / search capability: <a href="https://t.co/ZaPtIg4KvL">https://t.co/ZaPtIg4KvL</a> <a href="https://twitter.com/hashtag/js?src=hash">#js</a> <a href="https://twitter.com/hashtag/css?src=hash">#css</a></p>&mdash; Maks Surguy (@msurguy) <a href="https://twitter.com/msurguy/status/687410649199153152">January 13, 2016</a></blockquote>'}
+    ]),
+    result = [];
+
+    for(var i = 0, ii = tweets.length, item; i < ii; i++) {
+      item = tweets[i]
+      if(item.lang != 'en' && item.lang == userLang && Math.round(Math.random())) {
+        item.used = true;
+        result.push(item.markup)
+      }
+    }
+
+    while(result.length < amount) {
+      var item = tweets[numRange(0, tweets.length - 1)]
+      if(item.used) continue;
+      item.used = true;
+      result.push(item.markup)
+    }
+
+    for(var i = 0; i < result.length; i++) {
+      result[i] = '<div class="m6 l4 col '+(i == amount-1 ? 'hide-on-med-and-down' : '')+'">' + result[i] + '</div>';
+    }
+
+    $('#tweets').html(result.join(''));
+
+    $(window).on('scroll.tweets', function() {
+      if($(window).scrollTop() + window.innerHeight > $(document).height() / 2) {
+        $('body').append('<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>');
+        $(window).off('scroll.tweets');
+      }
+    });
+  }
+
+  fillTweets(3);
+
+  /**
+   * Utils
+   */
+
+  function numRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
 });
