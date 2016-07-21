@@ -249,6 +249,8 @@
   width: 100%;
   height: 65px;
   position: relative;
+  -webkit-transition: all 0.35s ease-out;
+  transition: all 0.35s ease-out;
 }
 
 .see-also:hover:before {
@@ -266,9 +268,19 @@
   background-position: center;
 }
 
+.see-also-clusterize:hover {
+  background-position: 0 53%;
+}
+
+
 .see-also-multiple {
   background-image: url('../img/multiple.jpg');
 }
+
+.see-also-multiple:hover {
+  background-position: 0 3%;
+}
+
 
 .see-also-container.row,
 .see-also-container .row {
