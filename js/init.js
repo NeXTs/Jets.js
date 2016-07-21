@@ -8,7 +8,7 @@ $(function() {
     peopleJSON = JSON.parse(people);
   for (var i = 0; i < 1000; i++) {
       content.tr.push('<tr><td>' + peopleJSON[i][0] + '</td><td>' + peopleJSON[i][1] + '</td></tr>');
-      if(i > 200) continue;
+      if(i > 50) continue;
       content.div.push('<div>' + peopleJSON[i][0] + '</div>');
       content.li.push('<li>' + peopleJSON[i][0] + '</li>');
   }
