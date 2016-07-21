@@ -290,3 +290,18 @@
 .see-also-container h5 {
   font-size: 1.3rem;
 }
+
+.additional-list-header {
+  position: relative;
+}
+
+.additional-list-header span.badge.new:after {
+  display: none;
+}
+
+ul.additional-list li {
+  height: 22px;
+  overflow: hidden;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}

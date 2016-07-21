@@ -288,7 +288,8 @@ $(function() {
 
   new Jets({
     searchTag: '#additionalListInput',
-    contentTag: '.additional-list'
+    contentTag: '.additional-list',
+    hideBy: 'opacity:0; height:0'
   });
 
   $('.action-demo-toggle').on('mouseenter touchstart', function() {

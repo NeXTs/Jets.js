@@ -216,7 +216,7 @@
               </div>
               <div class="row">
                 <div class="col s6">
-                  <h5>LIST</h5>
+                  <h5 class="additional-list-header">LIST <span class="new badge">animation!</span></h5>
                   <ul class="additional-list" id="additionalListUl"></ul>
                 </div>
                 <div class="col s6">
@@ -398,6 +398,17 @@
                 <td>false</td>
               </tr>
               <tr>
+                <td>hideBy</td>
+                <td>Optional</td>
+                <td>Specifies CSS rules to hide rows. May be helpful for animation</td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#hideByModal"><i class="material-icons dp48">code</i></a>
+                </td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#hideByDefaultModal"><i class="material-icons dp48">code</i></a>
+                </td>
+              </tr>
+              <tr>
                 <td>searchSelector</td>
                 <td>Optional</td>
                 <td>
@@ -507,6 +518,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.10.0 Added hideby option</li>
             <li>0.9.0 Added callSearchManually option</li>
             <li>0.8.0 Fixed IFFY root context</li>
             <li>0.7.0 Added invert option</li>
@@ -610,6 +622,26 @@ npm test</code></pre>
         <pre><code class="language-javascript">manualContentHandling: function(tag) {
   return tag.getAttribute('custom');
 }</code></pre>
+      </div>
+    </div>
+    <div id="hideByModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>In case you want to toggle rows with animation</p>
+        <pre><code class="language-javascript">hideBy: 'opacity: 0; height: 0;'</code></pre>
+        <p>Don't forget to specify additional CSS rules for rows animation</p>
+        <pre><code class="language-css">#jetsContent li {
+  height: 22px;
+  overflow: hidden;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}</code></pre>
+        <p>Beware using this with huge lists as it may be resource-intensive!</p>
+      </div>
+    </div>
+    <div id="hideByDefaultModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>By default rows are hidden by</p>
+        <pre><code class="language-javascript">hideBy: 'display: none'</code></pre>
       </div>
     </div>
     <div id="didSearchModal" class="modal bottom-sheet">

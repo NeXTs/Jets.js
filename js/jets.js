@@ -1,4 +1,4 @@
-/*! Jets.js - v0.9.0 - 2016-04-26
+/*! Jets.js - v0.10.0 - 2016-07-21
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -26,11 +26,12 @@
 
     var defaults = {
       searchSelector: '*AND',
+      hideBy: 'display:none',
       diacriticsMap: {}
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'manualContentHandling', 'callSearchManually', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'manualContentHandling', 'callSearchManually', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -69,18 +70,19 @@
       }.bind(this));
     },
     _applyCSS: function() {
-      var search_phrase = this.replaceDiacritics(this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' ')),
-        words = this.options.searchSelectorMode
+      var options = this.options,
+        search_phrase = this.replaceDiacritics(this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' ')),
+        words = options.searchSelectorMode
           ? search_phrase.split(' ').filter(function(item, pos, arr) { return arr.indexOf(item) == pos; })
           : [search_phrase],
-        is_strict_selector = this.options.searchSelectorMode == 'AND',
+        is_strict_selector = options.searchSelectorMode == 'AND',
         selectors = [];
       for(var i = 0, ii = words.length; i < ii; i++) {
-        selectors.push((is_strict_selector ? this.content_param + '>' : '') + (this.options.invert ? '' : ':not(') + '[data-jets' +
-          this.options.searchSelector + '="' + words[i] + '"]' + (this.options.invert ? '' : ')'));
+        selectors.push((is_strict_selector ? this.content_param + '>' : '') + (options.invert ? '' : ':not(') + '[data-jets' +
+          options.searchSelector + '="' + words[i] + '"]' + (options.invert ? '' : ')'));
       }
-      var css_rule = (is_strict_selector ? '' : this.content_param + '>') + selectors.join(is_strict_selector ? ',' : '') +
-        '{display:none' + (this.options.addImportant ? '!important' : '') + '}';
+      var hide_rules = options.hideBy.split(';').filter(Boolean).map(function(rule) { return rule + (options.addImportant ? '!important' : '') });
+      var css_rule = (is_strict_selector ? '' : this.content_param + '>') + selectors.join(is_strict_selector ? ',' : '') + '{' + hide_rules.join(';') + '}';
       this.styleTag.innerHTML = search_phrase.length ? css_rule : '';
     },
     _addStyleTag: function() {
