@@ -1,4 +1,4 @@
-/*! Jets.js - v0.10.0 - 2016-07-21
+/*! Jets.js - v0.11.0 - 2016-07-30
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -71,7 +71,7 @@
     },
     _applyCSS: function() {
       var options = this.options,
-        search_phrase = this.replaceDiacritics(this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' ')),
+        search_phrase = this.replaceDiacritics(this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' ')).replace(/\\/g, '\\\\'),
         words = options.searchSelectorMode
           ? search_phrase.split(' ').filter(function(item, pos, arr) { return arr.indexOf(item) == pos; })
           : [search_phrase],
