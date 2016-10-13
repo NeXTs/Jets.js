@@ -43,7 +43,7 @@
     var last_search_query;
     self.search = function() {
       if(last_search_query == (last_search_query = self.search_tag.value)) return;
-      self._applyCSS();
+      (0,self._applyCSS());
       self.options.didSearch && self.options.didSearch(self.search_tag.value);
     };
     self._onSearch = function(event) {
@@ -76,10 +76,10 @@
           ? search_phrase.split(' ').filter(function(item, pos, arr) { return arr.indexOf(item) == pos; })
           : [search_phrase],
         is_strict_selector = options.searchSelectorMode == 'AND',
-        selectors = [];
+        selectors = new Array(words.length);
       for(var i = 0, ii = words.length; i < ii; i++) {
-        selectors.push((is_strict_selector ? this.content_param + '>' : '') + (options.invert ? '' : ':not(') + '[data-jets' +
-          options.searchSelector + '="' + words[i] + '"]' + (options.invert ? '' : ')'));
+        selectors[i] = (is_strict_selector ? this.content_param + '>' : '') + (options.invert ? '' : ':not(') + '[data-jets' +
+          options.searchSelector + '="' + words[i] + '"]' + (options.invert ? '' : ')');
       }
       var hide_rules = options.hideBy.split(';').filter(Boolean).map(function(rule) { return rule + (options.addImportant ? '!important' : '') });
       var css_rule = (is_strict_selector ? '' : this.content_param + '>') + selectors.join(is_strict_selector ? ',' : '') + '{' + hide_rules.join(';') + '}';
