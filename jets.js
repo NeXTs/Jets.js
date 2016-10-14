@@ -1,4 +1,4 @@
-/*! Jets.js - v0.11.0 - 2016-07-30
+/*! Jets.js - v0.12.0 - 2016-10-14
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
