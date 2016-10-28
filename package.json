@@ -1,8 +1,8 @@
 {
   "name": "jets",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Native CSS search engine",
-  "main": "jets.min.js",
+  "main": "jets.js",
   "scripts": {
     "test": "mocha-phantomjs ./test/index.html"
   },
