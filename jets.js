@@ -44,7 +44,7 @@
     self.search = function() {
       if(last_search_query == (last_search_query = self.search_tag.value)) return;
       (0,self._applyCSS());
-      self.options.didSearch && self.options.didSearch(self.search_tag.value);
+      self.options.didSearch && self.options.didSearch(last_search_query);
     };
     self._onSearch = function(event) {
       if(event.type == 'keydown')
