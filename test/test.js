@@ -303,6 +303,14 @@ describe('Jets', function() {
       assert.lengthOf($content.children(':visible'), 1);
     })
 
+    it('Should call search by manual calling .search with search phrase as attribute', function() {
+      jet = new Jets(ext({
+        callSearchManually: true
+      }));
+      jet.search(people[0]);
+      assert.lengthOf($content.children(':visible'), 1);
+    })
+
   })
 
 })

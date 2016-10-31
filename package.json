@@ -1,6 +1,6 @@
 {
   "name": "jets",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "description": "Native CSS search engine",
   "main": "jets.js",
   "scripts": {
