@@ -371,34 +371,34 @@
             <tbody>
               <tr>
                 <td>searchTag</td>
-                <td><b>Required</b></td>
-                <td>Selector for search input tag. Refers to document.querySelector()</td>
-                <td>'#searchInput'</td>
+                <td><b class='nowrap'>It depends</b></td>
+                <td><div style='position: relative'>Selector for search input tag. Refers to <code class="language-javascript">document.querySelector()</code>.<br/>May be omitted if you want to call search manually, in this case see <code class="language-javascript">callSearchManually</code> and <code class="language-javascript">.search()</code><span class="badge new"></span></div></td>
+                <td><code class="language-javascript">'#searchInput'</code></td>
                 <td></td>
               </tr>
               <tr>
                 <td>contentTag</td>
                 <td><b>Required</b></td>
-                <td>Selector for content tag. Refers to document.querySelectorAll() so many lists can be processed at one time. For example '.list' where page contains two tags ul.list. See example at "<a href="#multitag">Works with any list</a>"</td>
-                <td>'#jetsContent'</td>
+                <td>Selector for content tag. Refers to <code class="language-javascript">document.querySelectorAll()</code> so many lists can be processed at one time. For example '.list' where page contains two tags ul.list. See example at "<a href="#multitag">Works with any list</a>"</td>
+                <td><code class="language-javascript">'#jetsContent'</code></td>
                 <td></td>
               </tr>
               <tr>
                 <td>columns</td>
                 <td>Optional</td>
                 <td>In the case of a table, you can specify certain columns for search</td>
-                <td>[1, 2]</td>
+                <td><code class="language-javascript">[1, 2]</code></td>
                 <td></td>
               </tr>
               <tr>
                 <td>addImportant</td>
                 <td>Optional</td>
                 <td>Specifies whether to add !important to the CSS search query</td>
-                <td>true</td>
-                <td>false</td>
+                <td><code class="language-javascript">true</code></td>
+                <td><code class="language-javascript">false</code></td>
               </tr>
               <tr>
-                <td style="position: relative;">hideBy <span class="badge new"></span></td>
+                <td>hideBy</td>
                 <td>Optional</td>
                 <td>Specifies CSS rules to hide rows. May be helpful for animation</td>
                 <td>
@@ -441,9 +441,9 @@
               <tr>
                 <td>callSearchManually</td>
                 <td>Optional</td>
-                <td>If true - will not attach event listeners to searchTag. Allows you to call search manually (by calling .search()). May be especially useful for cases when handling huge lists.</td>
-                <td>true</td>
-                <td>false</td>
+                <td>If true - will not attach event listeners to searchTag. Allows you to call search manually (by calling <code class="language-javascript">.search()</code>). May be especially useful for cases when handling huge lists. Or if you want seach by calling <code class="language-javascript">.search('search phrase')</code> instead of observing searchTag's value</td>
+                <td><code class="language-javascript">true</code></td>
+                <td><code class="language-javascript">false</code></td>
               </tr>
               <tr>
                 <td>didSearch</td>
@@ -467,8 +467,8 @@
                 <td>invert</td>
                 <td>Optional</td>
                 <td>Invert results</td>
-                <td>true</td>
-                <td>false</td>
+                <td><code class="language-javascript">true</code></td>
+                <td><code class="language-javascript">false</code></td>
               </tr>
             </tbody>
           </table>
@@ -491,13 +491,16 @@
                 <td class="nowrap">.update()</td>
                 <td><b>Boolean</b></td>
                 <td>
-                  Updates "Jets attributes" which used for search. This method should be called after adding new items to the list or changing values of some of them. By default .update() would process only rows <b>without "data-jets"</b> attribute for performance reasons. So if you've added new rows, .update() will process them cause they don't have "data-jets" attribute yet. If you have changed content of some rows, remove their "data-jets" attributes and call .update(). If you need to forcibly update all tags in spite of everything, set parameter as <b>true</b>.
+                  Updates "Jets attributes" which used for search. This method should be called after adding new items to the list or changing values of some of them. By default <code class="language-javascript">.update()</code> would process only rows <b>without "data-jets"</b> attribute for performance reasons. So if you've added new rows, <code class="language-javascript">.update()</code> will process them cause they don't have "data-jets" attribute yet. If you have changed content of some rows, remove their "data-jets" attributes and call <code class="language-javascript">.update()</code>. If you need to forcibly update all tags in spite of everything, set parameter as <b>true</b>.
                 </td>
               </tr>
               <tr>
                 <td class="nowrap">.search()</td>
-                <td></td>
-                <td>Triggers search. May be useful in pair with callSearchManually option.</td>
+                <td><b>String</b></td>
+                <td style='position: relative'>
+                  Triggers search. May be useful in pair with <code class="language-javascript">callSearchManually</code> option.<br/>
+                  If search phrase specified by attribute <code class="language-javascript">.search('phrase')</code> it will be used, otherwise <code class="language-javascript">.search()</code> value will be taken from searchTag. <span class="badge new"></span>
+                </td>
               </tr>
               <tr>
                 <td class="nowrap">.destroy()</td>
@@ -518,6 +521,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.13.0 Manual search without searchTag <a href='https://github.com/NeXTs/Jets.js/pull/28' target='_blank'>#28</a></li>
             <li>0.12.0 Perf boost. Thanks to <a href='https://github.com/NeXTs/Jets.js/pull/26' target='_blank'>@seokirill</a></li>
             <li>0.11.0 Escape backslashes</li>
             <li>0.10.0 Added hideBy method</li>

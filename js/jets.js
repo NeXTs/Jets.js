@@ -1,4 +1,4 @@
-/*! Jets.js - v0.12.0 - 2016-10-14
+/*! Jets.js - v0.13.0 - 2016-10-31
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -14,15 +14,6 @@
       return new Jets(opts);
     }
     var self = this;
-    ['searchTag', 'contentTag'].forEach(function(param) {
-      var name = param.replace('Tag', ''),
-        queryMethod = 'querySelector' + (param == 'contentTag' ? 'All' : '');
-      self[name + '_tag'] = document[queryMethod](opts[param]);
-      self[name + '_param'] = opts[param];
-      if( ! self[name + '_tag']) {
-        throw new Error('Error! Could not find ' + param + ' element');
-      }
-    });
 
     var defaults = {
       searchSelector: '*AND',
@@ -40,11 +31,22 @@
       self.options.searchSelectorMode = searchSelector.substr(1).toUpperCase();
     }
 
-    var last_search_query;
-    self.search = function() {
-      if(last_search_query == (last_search_query = self.search_tag.value)) return;
-      (0,self._applyCSS());
-      self.options.didSearch && self.options.didSearch(self.search_tag.value);
+    self.content_tag = document.querySelectorAll(opts.contentTag);
+    if( ! self.content_tag) throw new Error('Error! Could not find contentTag element');
+    self.content_param = opts.contentTag;
+    self.search_tag = document.querySelector(opts.searchTag);
+    if( ! self.search_tag && ! self.options.callSearchManually) throw new Error('Error! Provide one of search methods: searchTag or callSearchManually and call .search("phrase") manually');
+
+    var last_search_query = self.search_tag && self.search_tag.value || '';
+    self.search = function(search_query) {
+      var new_search_query = self.options.callSearchManually && typeof search_query != 'undefined'
+        ? search_query
+        : self.search_tag
+          ? self.search_tag.value
+          : ''
+      if(last_search_query == (last_search_query = new_search_query)) return;
+      (0,self._applyCSS(last_search_query));
+      self.options.didSearch && self.options.didSearch(last_search_query);
     };
     self._onSearch = function(event) {
       if(event.type == 'keydown')
@@ -59,7 +61,7 @@
     if( ! self.options.callSearchManually) self._processEventListeners('add');
     self._addStyleTag();
     self._setJets();
-    self._applyCSS();
+    self._applyCSS(last_search_query);
   }
 
   Jets.prototype = {
@@ -69,9 +71,9 @@
         this.search_tag[action + 'EventListener'](event_type, this._onSearch);
       }.bind(this));
     },
-    _applyCSS: function() {
+    _applyCSS: function(search_query) {
       var options = this.options,
-        search_phrase = this.replaceDiacritics(this.search_tag.value.trim().toLowerCase().replace(/\s\s+/g, ' ')).replace(/\\/g, '\\\\'),
+        search_phrase = this.replaceDiacritics(search_query.trim().toLowerCase().replace(/\s\s+/g, ' ')).replace(/\\/g, '\\\\'),
         words = options.searchSelectorMode
           ? search_phrase.split(' ').filter(function(item, pos, arr) { return arr.indexOf(item) == pos; })
           : [search_phrase],
