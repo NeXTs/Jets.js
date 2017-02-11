@@ -313,4 +313,40 @@ describe('Jets', function() {
 
   })
 
+  describe('searchInSpecificColumn option', function() {
+
+    it('Should search in specific column', function() {
+      // duplicate data in columns (in reversed order)
+      $content.html($.map(people, function(val, i){
+        var reversed = val.split('').reverse().join('');
+        return '<tr><td>' + val + '</td><td>' + people[people.length - i - 1] + '</td></tr>'
+      }).join(''));
+      jet = new Jets(ext({
+        callSearchManually: true,
+        searchInSpecificColumn: true
+      }));
+      make(function() {
+        jet.search(people[0], 0);
+      })
+      assert.lengthOf($content.children(':visible'), 1);
+    })
+
+    it('Should search in all column in column not specified', function() {
+      // duplicate data in columns (in reversed order)
+      $content.html($.map(people, function(val, i){
+        var reversed = val.split('').reverse().join('');
+        return '<tr><td>' + val + '</td><td>' + people[people.length - i - 1] + '</td></tr>'
+      }).join(''));
+      jet = new Jets(ext({
+        callSearchManually: true,
+        searchInSpecificColumn: true
+      }));
+      make(function() {
+        jet.search(people[0]);
+      })
+      assert.lengthOf($content.children(':visible'), 2);
+    })
+
+  })
+
 })
