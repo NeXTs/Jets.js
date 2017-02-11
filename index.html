@@ -446,6 +446,15 @@
                 <td><code class="language-javascript">false</code></td>
               </tr>
               <tr>
+                <td>searchInSpecificColumn</td>
+                <td>Optional</td>
+                <td>If true - will add separate attributes (<code class="language-markup">data-jets-col-0="first column content"</code>) of each column content, which then may be used for specific column search by calling <code class="language-javascript">.search('search phrase', 0)</code>. To use this option, <code class="language-javascript">callSearchManually</code> must be set to true.</td>
+                <td>
+                  <a class="waves-effect waves-light modal-trigger" href="#searchInSpecificColumnModal"><i class="material-icons dp48">code</i></a>
+                </td>
+                <td><code class="language-javascript">false</code></td>
+              </tr>
+              <tr>
                 <td>didSearch</td>
                 <td>Optional</td>
                 <td>Callback function that will be called right after applying new CSS rule. Provides single argument with last search phrase.</td>
@@ -521,6 +530,7 @@ npm test</code></pre>
         <div class="col s12 m4">
           <h5>Changelog</h5>
           <ul>
+            <li>0.14.0 Specific column search <a href='https://github.com/NeXTs/Jets.js/pull/30' target='_blank'>#30</a></li>
             <li>0.13.0 Manual search without searchTag <a href='https://github.com/NeXTs/Jets.js/pull/28' target='_blank'>#28</a></li>
             <li>0.12.0 Perf boost. Thanks to <a href='https://github.com/NeXTs/Jets.js/pull/26' target='_blank'>@seokirill</a></li>
             <li>0.11.0 Escape backslashes</li>
@@ -628,6 +638,21 @@ npm test</code></pre>
         <pre><code class="language-javascript">manualContentHandling: function(tag) {
   return tag.getAttribute('custom');
 }</code></pre>
+      </div>
+    </div>
+    <div id="searchInSpecificColumnModal" class="modal bottom-sheet">
+      <div class="modal-content">
+        <p>Search in specific column example</p>
+        <pre><code class="language-javascript">var jets = new Jets({
+  contentTag: '#jetsContent',
+  callSearchManually: true, // must be true to be able call search manually by .search()
+  searchInSpecificColumn: true,
+  columns: [0, 1] // optional, will add additional attributes of first and second columns only (ignoring others)
+});
+
+jets.search('phrase', 0); // will search in first column only
+jets.search('phrase'); // will search in all columns
+</code></pre>
       </div>
     </div>
     <div id="hideByModal" class="modal bottom-sheet">

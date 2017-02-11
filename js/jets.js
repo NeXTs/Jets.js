@@ -1,4 +1,4 @@
-/*! Jets.js - v0.13.0 - 2016-10-31
+/*! Jets.js - v0.14.0 - 2017-02-11
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -22,7 +22,7 @@
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'manualContentHandling', 'callSearchManually', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'manualContentHandling', 'callSearchManually', 'searchInSpecificColumn', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -38,14 +38,14 @@
     if( ! self.search_tag && ! self.options.callSearchManually) throw new Error('Error! Provide one of search methods: searchTag or callSearchManually and call .search("phrase") manually');
 
     var last_search_query = self.search_tag && self.search_tag.value || '';
-    self.search = function(search_query) {
+    self.search = function(search_query, optional_column) {
       var new_search_query = self.options.callSearchManually && typeof search_query != 'undefined'
         ? search_query
         : self.search_tag
           ? self.search_tag.value
           : ''
       if(last_search_query == (last_search_query = new_search_query)) return;
-      (0,self._applyCSS(last_search_query));
+      (0,self._applyCSS(last_search_query, optional_column));
       self.options.didSearch && self.options.didSearch(last_search_query);
     };
     self._onSearch = function(event) {
@@ -71,7 +71,7 @@
         this.search_tag[action + 'EventListener'](event_type, this._onSearch);
       }.bind(this));
     },
-    _applyCSS: function(search_query) {
+    _applyCSS: function(search_query, optional_column) {
       var options = this.options,
         search_phrase = this.replaceDiacritics(search_query.trim().toLowerCase().replace(/\s\s+/g, ' ')).replace(/\\/g, '\\\\'),
         words = options.searchSelectorMode
@@ -80,8 +80,10 @@
         is_strict_selector = options.searchSelectorMode == 'AND',
         selectors = new Array(words.length);
       for(var i = 0, ii = words.length; i < ii; i++) {
-        selectors[i] = (is_strict_selector ? this.content_param + '>' : '') + (options.invert ? '' : ':not(') + '[data-jets' +
-          options.searchSelector + '="' + words[i] + '"]' + (options.invert ? '' : ')');
+        selectors[i] = (is_strict_selector ? this.content_param + '>' : '') +
+          (options.invert ? '' : ':not(') + 
+          '[data-jets' + (typeof optional_column != 'undefined' ? '-col-' + optional_column : '') + options.searchSelector + '="' + words[i] + '"]' + 
+          (options.invert ? '' : ')');
       }
       var hide_rules = options.hideBy.split(';').filter(Boolean).map(function(rule) { return rule + (options.addImportant ? '!important' : '') });
       var css_rule = (is_strict_selector ? '' : this.content_param + '>') + selectors.join(is_strict_selector ? ',' : '') + '{' + hide_rules.join(';') + '}';
@@ -94,10 +96,21 @@
     _getText: function(tag) {
       return tag && (tag.textContent || tag.innerText) || '';
     },
+    _sanitize: function(text) {
+      return this.replaceDiacritics(text).trim().replace(/\s+/g, ' ').toLowerCase()
+    },
     _getContentTags: function(query) {
       return Array.prototype.slice.call(this.content_tag).reduce(function(all, elem) {
         return all.concat(Array.prototype.slice.call(elem.querySelectorAll(query || ':scope > *')));
       }, []);
+    },
+    _handleSpecificColumns: function(tag, set) {
+      var self = this;
+      if( ! self.options.searchInSpecificColumn) return;
+      Array.prototype.slice.call(tag.children).map(function(children, i) {
+        if(self.options.columns && self.options.columns.length && self.options.columns.indexOf(i) == -1) return
+        tag[(set || 'remove') + 'Attribute']('data-jets-col-' + i, set && self._sanitize(self._getText(children)));
+      })
     },
     _setJets: function(query, force) {
       var self = this,
@@ -111,7 +124,8 @@
                 return self._getText(tag.children[column]);
               }).join(' ')
             : self._getText(tag);
-        tag.setAttribute('data-jets', self.replaceDiacritics(text.trim().replace(/\s+/g, ' ').toLowerCase()));
+        tag.setAttribute('data-jets', self._sanitize(text));
+        self._handleSpecificColumns(tag, 'set');
       };
     },
     replaceDiacritics: function(text) {
@@ -131,6 +145,7 @@
       var tags = this._getContentTags();
       for(var i = 0, tag; tag = tags[i]; i++) {
         tag.removeAttribute('data-jets');
+        this._handleSpecificColumns(tag);
       }
     }
   }
