@@ -305,3 +305,39 @@ ul.additional-list li {
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
+
+#carbonads {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  right: 20px;
+  background: white;
+  padding-top: 14px;
+}
+
+#carbonads:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.carbon-wrap {
+
+}
+
+.carbon-img {
+  float: left;
+  margin-right: 10px;
+}
+
+.carbon-text {
+  display: block;
+  font-size: 13px;
+}
+
+.carbon-poweredby {
+  float: right;
+  margin-top: 10px;
+  font-size: 11px;
+  font-style: italic;
+}
