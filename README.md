@@ -9,6 +9,4 @@
 
 [Demo, usage, etc…](https://jets.js.org/)
 
-[![Code Sponsor](https://app.codesponsor.io/embed/VdXnbBqMapoM2ygsq3ca62Sy/NeXTs/Jets.js.svg)](https://app.codesponsor.io/link/VdXnbBqMapoM2ygsq3ca62Sy/NeXTs/Jets.js)
-
 [![example](http://nexts.github.io/Jets.js/img/demo_hover.gif)](https://jets.js.org/)
