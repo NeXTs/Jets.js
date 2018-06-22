@@ -1,4 +1,4 @@
-/*! Jets.js - v0.14.0 - 2017-02-11
+/*! Jets.js - v0.14.1 - 2018-06-22
 * http://NeXTs.github.com/Jets.js/
 * Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
@@ -160,9 +160,9 @@
         var nativ = proto[method];
         proto[method] = function(selectors) {
           if (/(^|,)\s*:scope/.test(selectors)) {
-            var id = this.id;
+            var id = this.getAttribute('id');
             this.id = 'ID_' + Date.now();
-            selectors = selectors.replace(/((^|,)\s*):scope/g, '$1#' + this.id);
+            selectors = selectors.replace(/((^|,)\s*):scope/g, '$1#' + this.getAttribute('id'));
             var result = doc[method](selectors);
             this.id = id;
             return result;
