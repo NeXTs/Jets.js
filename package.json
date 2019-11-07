@@ -4,7 +4,7 @@
   "description": "Native CSS search engine",
   "main": "jets.js",
   "scripts": {
-    "test": "mocha-phantomjs ./test/index.html"
+    "test": "mocha-headless-chrome -f ./test/index.html"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,7 @@
     "chai": "^4.0.0",
     "jquery": "^3.0.0",
     "mocha": "^3.0.0",
-    "mocha-phantomjs": "^4.0.2",
-    "phantomjs": "2.1.7"
+    "mocha-headless-chrome": "^2.0.2"
   },
   "bugs": {
     "url": "https://github.com/NeXTs/Jets.js/issues"
