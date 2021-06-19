@@ -22,7 +22,7 @@
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'manualContentHandling', 'callSearchManually', 'searchInSpecificColumn', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'nonceId', 'manualContentHandling', 'callSearchManually', 'searchInSpecificColumn', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
@@ -90,7 +90,9 @@
       this.styleTag.innerHTML = search_phrase.length ? css_rule : '';
     },
     _addStyleTag: function() {
+      var options = this.options;
       this.styleTag = document.createElement('style');
+      this.styleTag.setAttribute('nonce', options.nonceId);
       document.head.appendChild(this.styleTag);
     },
     _getText: function(tag) {
