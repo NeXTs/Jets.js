@@ -92,7 +92,7 @@
     _addStyleTag: function() {
       var options = this.options;
       this.styleTag = document.createElement('style');
-      this.styleTag.setAttribute('nonce', options.nonceId);
+      if(typeof options.nonceId != 'undefined') this.styleTag.setAttribute('nonce', options.nonceId);
       document.head.appendChild(this.styleTag);
     },
     _getText: function(tag) {
