@@ -1,6 +1,7 @@
-/*! Jets.js - v0.14.1 - 2018-06-22
-* http://NeXTs.github.com/Jets.js/
-* Copyright (c) 2015 Denis Lukov; Licensed MIT */
+/*
+ Jets.js - v0.15.0 - 2022-12-11
+ http://NeXTs.github.com/Jets.js/
+ Copyright (c) 2015 Denis Lukov; Licensed MIT */
 
 ;(function(root, definition) {
   if (typeof module != 'undefined') module.exports = definition();
@@ -22,7 +23,7 @@
     }
 
     self.options = {};
-    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'nonceId', 'manualContentHandling', 'callSearchManually', 'searchInSpecificColumn', 'diacriticsMap', 'didSearch', 'invert'].forEach(function(name) {
+    ['columns', 'addImportant', 'searchSelector', 'hideBy', 'manualContentHandling', 'callSearchManually', 'searchInSpecificColumn', 'diacriticsMap', 'didSearch', 'invert', 'nonceId'].forEach(function(name) {
       self.options[name] = opts[name] || defaults[name];
     });
     if(this.options.searchSelector.length > 1) {
